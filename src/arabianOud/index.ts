@@ -1,9 +1,6 @@
 let stores = [
   {
-    id: 2,
-  },
-  {
-    id: 3,
+    id: 1,
   },
 ];
 
@@ -52,41 +49,45 @@ for (let i = 0; i < stores.length; ++i) {
   );
   startDate.setDate(startDate.getDate() + 1);
   for (let x = 0; x < 364; ++x) {
-    console.log("-----------------------------------------");
-    // console.log(startDate);
     for (let hour = 1; hour <= 24; ++hour) {
       startDate = addHours(startDate, 1);
-      console.log(startDate.getHours());
+      let startHour = getRandomInt(8, 10)
       if (startDate.getHours() == 8) {
-        let referenceTime = startDate;
-        let shopKeeperEnterTime = addMinutes(
-          startDate,
-          getRandomInt(1, 25) // 1 to 10 minutes
-        );
-        generateKeeper(stores[i].id, shopKeeperEnterTime, true);
-        let visitors = getRandomInt(3, 5);
-        let visitorTime = addMinutes(shopKeeperEnterTime, getRandomInt(5, 7));
-        for (let m = 0; m < visitors; ++m) {
-          generateVisitors(stores[i].id, visitorTime);
-          visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+        if (startHour === 8) {
+
+          let referenceTime = startDate;
+          let shopKeeperEnterTime = addMinutes(
+            startDate,
+            getRandomInt(45, 60) // 1 to 10 minutes
+          );
+          generateKeeper(stores[i].id, shopKeeperEnterTime, true);
+          let visitors = getRandomInt(3, 5);
+          let visitorTime = addMinutes(shopKeeperEnterTime, getRandomInt(5, 7));
+          for (let m = 0; m < visitors; ++m) {
+            generateVisitors(stores[i].id, visitorTime);
+            visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+          }
+          let snapshotTime = addHours(referenceTime, 1);
+          generateOccupancy(
+            stores[i].id,
+            snapshotTime,
+            getRandomInt(visitors - 1, visitors)
+          );
         }
-        let snapshotTime = addHours(referenceTime, 1);
-        generateOccupancy(
-          stores[i].id,
-          snapshotTime,
-          getRandomInt(visitors - 1, visitors)
-        );
       }
+
       if (startDate.getHours() == 9) {
         let referenceTime = startDate;
-        let visitors = getRandomInt(4, 8);
-        let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
-        for (let m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
+        if (startHour === 9) {
+          let shopKeeperEnterTime = addMinutes(
+            startDate,
+            getRandomInt(0, 45) // 1 to 10 minutes
           );
+          generateKeeper(stores[i].id, shopKeeperEnterTime, true);
+        }
+        let visitors = getRandomInt(4, 8);
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
+        for (let m = 0; m < visitors; ++m) {
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
         }
@@ -100,13 +101,8 @@ for (let i = 0; i < stores.length; ++i) {
       if (startDate.getHours() == 10) {
         let referenceTime = startDate;
         let visitors = getRandomInt(5, 8);
-        let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
         for (let m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
         }
@@ -119,15 +115,9 @@ for (let i = 0; i < stores.length; ++i) {
       }
       if (startDate.getHours() == 11) {
         let referenceTime = startDate;
-        let visitors = getRandomInt(15, 18);
-        console.log("VISISTORS AT 11",visitors)
-        let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
+        let visitors = getRandomInt(5, 8);
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
         for (let m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
         }
@@ -138,7 +128,54 @@ for (let i = 0; i < stores.length; ++i) {
           getRandomInt(visitors - 1, visitors)
         );
       }
+
+
       if (startDate.getHours() == 12) {
+        let referenceTime = startDate;
+        let visitors = getRandomInt(15, 18);
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
+        for (let m = 0; m < visitors; ++m) {
+          generateVisitors(stores[i].id, visitorTime);
+          visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+        }
+        let snapshotTime = addHours(referenceTime, 1);
+        generateOccupancy(
+          stores[i].id,
+          snapshotTime,
+          getRandomInt(visitors - 1, visitors)
+        );
+      }
+      if (startDate.getHours() == 13) {
+        let referenceTime = startDate;
+        let visitors = getRandomInt(15, 18);
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
+        for (let m = 0; m < visitors; ++m) {
+          generateVisitors(stores[i].id, visitorTime);
+          visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+        }
+        let snapshotTime = addHours(referenceTime, 1);
+        generateOccupancy(
+          stores[i].id,
+          snapshotTime,
+          getRandomInt(visitors - 1, visitors)
+        );
+      }
+      if (startDate.getHours() == 14) {
+        let referenceTime = startDate;
+        let visitors = getRandomInt(15, 18);
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
+        for (let m = 0; m < visitors; ++m) {
+          generateVisitors(stores[i].id, visitorTime);
+          visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+        }
+        let snapshotTime = addHours(referenceTime, 1);
+        generateOccupancy(
+          stores[i].id,
+          snapshotTime,
+          getRandomInt(visitors - 1, visitors)
+        );
+      }
+      if (startDate.getHours() == 15) {
         let referenceTime = addMinutes(startDate, getRandomInt(7, 15));
         generateKeeper(stores[i].id, referenceTime, false);
       }
@@ -149,11 +186,6 @@ for (let i = 0; i < stores.length; ++i) {
         var visitors = getRandomInt(3, 7);
         var visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
         for (var m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(10, 16));
         }
@@ -169,13 +201,8 @@ for (let i = 0; i < stores.length; ++i) {
         //5
         let referenceTime = startDate;
         let visitors = getRandomInt(8, 11);
-        let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
+        let visitorTime = addMinutes(referenceTime, getRandomInt(5, 7));
         for (let m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
         }
@@ -198,11 +225,6 @@ for (let i = 0; i < stores.length; ++i) {
         var visitors = getRandomInt(9, 11);
         var visitorTime = addMinutes(referenceTime, getRandomInt(6, 7));
         for (var m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(10, 16));
         }
@@ -219,11 +241,6 @@ for (let i = 0; i < stores.length; ++i) {
         let visitors = getRandomInt(10, 12);
         let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
         for (let m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(10, 16));
         }
@@ -236,17 +253,10 @@ for (let i = 0; i < stores.length; ++i) {
       }
       if (startDate.getHours() == 21) {
         //9
-        console.log("HOUR 21");
         let referenceTime = startDate;
         let visitors = getRandomInt(10, 12);
-        console.log("NO: of Visitors: ", visitors);
         let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
         for (let m = 0; m < visitors; ++m) {
-          console.log(
-            "VISITOR :",
-            visitorTime.getHours(),
-            visitorTime.getMinutes()
-          );
           generateVisitors(stores[i].id, visitorTime);
           visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
         }
@@ -257,7 +267,43 @@ for (let i = 0; i < stores.length; ++i) {
           getRandomInt(visitors - 1, visitors)
         );
       }
+
       if (startDate.getHours() == 22) {
+        //9
+        let referenceTime = startDate;
+        let visitors = getRandomInt(10, 12);
+        let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
+        for (let m = 0; m < visitors; ++m) {
+          generateVisitors(stores[i].id, visitorTime);
+          visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+        }
+        let snapshotTime = addHours(referenceTime, 1);
+        generateOccupancy(
+          stores[i].id,
+          snapshotTime,
+          getRandomInt(visitors - 1, visitors)
+        );
+      }
+
+      if (startDate.getHours() == 23) {
+        //9
+        let referenceTime = startDate;
+        let visitors = getRandomInt(10, 12);
+        let visitorTime = addMinutes(startDate, getRandomInt(5, 7));
+        for (let m = 0; m < visitors; ++m) {
+          generateVisitors(stores[i].id, visitorTime);
+          visitorTime = addMinutes(visitorTime, getRandomInt(5, 7));
+        }
+        let snapshotTime = addHours(referenceTime, 1);
+        generateOccupancy(
+          stores[i].id,
+          snapshotTime,
+          getRandomInt(visitors - 1, visitors)
+        );
+      }
+
+
+      if (startDate.getHours() == 24) {
         // 10
         let referenceTime = addMinutes(startDate, getRandomInt(7, 15));
         generateKeeper(stores[i].id, referenceTime, false);
